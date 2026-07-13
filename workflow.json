@@ -1,0 +1,307 @@
+{
+  "name": "Prompt Starter Library Builder",
+  "description": "Turn rough tasks or prompt ideas into a reusable prompt starter library.",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "016bafb3-9977-43cf-a615-d1187d37e59f",
+      "name": "Manual Start",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        260,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "code-004",
+              "name": "workflow_code",
+              "value": "GP-WF-004",
+              "type": "string"
+            },
+            {
+              "id": "name-004",
+              "name": "workflow_name",
+              "value": "Prompt Library Builder",
+              "type": "string"
+            },
+            {
+              "id": "library-name-004",
+              "name": "library_name",
+              "value": "GetPrompting Practical Prompt Library",
+              "type": "string"
+            },
+            {
+              "id": "library-goal-004",
+              "name": "library_goal",
+              "value": "Create a clean prompt library for reusable AI workflows, content production, SEO planning, research, and productivity systems.",
+              "type": "string"
+            },
+            {
+              "id": "audience-004",
+              "name": "target_user",
+              "value": "Creators, consultants, students, and solo builders who want reusable prompts instead of losing useful prompts in chat history.",
+              "type": "string"
+            },
+            {
+              "id": "raw-prompts-004",
+              "name": "tasks_or_prompt_ideas",
+              "value": "Task 1: Turn messy notes into tasks.\nTask 2: Rewrite this article intro in a clearer, less salesy tone.\nTask 3: Create five newsletter subject lines for an AI workflow update.\nTask 4: Summarize these research notes and suggest three practical next steps.\nTask 5: Review this n8n workflow idea and point out where it may break.",
+              "type": "string"
+            },
+            {
+              "id": "preferred-categories-004",
+              "name": "preferred_categories",
+              "value": "Content, SEO, Productivity, Workflow Design, Research, Review",
+              "type": "string"
+            },
+            {
+              "id": "tag-style-004",
+              "name": "tag_style",
+              "value": "Use short lowercase tags with hyphens, like content-writing, workflow-design, research-summary, human-review.",
+              "type": "string"
+            },
+            {
+              "id": "output-style-004",
+              "name": "output_style",
+              "value": "Markdown prompt library with an index, one reusable entry per prompt, copy-ready prompt text, variables, use cases, and quality notes.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "cac2b03f-8f63-4284-9b61-d424bc3dfa5e",
+      "name": "Set Workflow Inputs",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        520,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = { ...$json };\n\nconst prompt = [\n  'You are an AI prompt architect.',\n  '',\n  'Your job is to turn rough user tasks into reusable, copy-ready starter prompts.',\n  '',\n  'Important behavior rules:',\n  '- Do not write Python.',\n  '- Do not write JavaScript.',\n  '- Do not explain how to process the data.',\n  '- Do not create a script, function, pseudo-code, or algorithm.',\n  '- Do not echo the input data back to the user.',\n  '- Do not include Markdown outside JSON.',\n  '- Return one JSON object only.',\n  '',\n  'Workflow: GP-WF-004 - Prompt Starter Library Builder',\n  'Problem it solves: People know what they want AI to help with, but they do not always know how to write a reusable prompt.',\n  'Main task: Convert rough tasks, workflow ideas, or prompt fragments into a structured prompt library.',\n  '',\n  'Input data:',\n  JSON.stringify(input, null, 2),\n  '',\n  'For each task in tasks_or_prompt_ideas:',\n  '- Generate one reusable starter prompt.',\n  '- Preserve the task intent.',\n  '- Improve it into a complete prompt someone can copy and use.',\n  '- Include role, context, task, output format, constraints, and human review guidance inside copy_ready_prompt.',\n  '- Use placeholders such as {notes}, {draft}, {audience}, {goal}, {workflow_description}, {research_notes}, {constraints}, or {source_material}.',\n  '- Make copy_ready_prompt useful and specific, usually 90 to 180 words.',\n  '- Keep the tone practical, clear, and non-salesy.',\n  '',\n  'Return ONLY valid JSON in this exact shape:',\n  '{',\n  '  \"document_title\": \"Prompt library title\",',\n  '  \"summary\": \"Plain-English summary of what this library helps with.\",',\n  '  \"library_name\": \"Library name\",',\n  '  \"library_goal\": \"What this library helps the user do.\",',\n  '  \"categories\": [\"Category 1\", \"Category 2\"],',\n  '  \"prompt_entries\": [',\n  '    {',\n  '      \"title\": \"Short prompt title\",',\n  '      \"category\": \"Best-fit category\",',\n  '      \"description\": \"What this prompt helps with\",',\n  '      \"use_case\": \"When someone should use it\",',\n  '      \"tags\": [\"tag-one\", \"tag-two\"],',\n  '      \"variables\": [\"{variable_name}\"],',\n  '      \"copy_ready_prompt\": \"Full starter prompt the user can copy and run\",',\n  '      \"quality_note\": \"What to check before trusting the output\"',\n  '    }',\n  '  ],',\n  '  \"organization_notes\": [\"How to maintain or expand this prompt library\"],',\n  '  \"missing_context_questions\": [\"Question that would make future prompts better\"],',\n  '  \"next_steps\": [\"Practical next step 1\", \"Practical next step 2\", \"Practical next step 3\"],',\n  '  \"review_note\": \"Short human review reminder.\"',\n  '}',\n  '',\n  'Final reminder: output JSON only. No code. No prose before the JSON. No Markdown fence.'\n].join('\\n');\n\nreturn [{ json: { ...input, prompt } }];\n"
+      },
+      "id": "a5f64fcb-cd0b-41da-a8a0-b9f35500c8c0",
+      "name": "Build AI Prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        780,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.prompt }}",
+        "batching": {}
+      },
+      "id": "0aa0bbbb-8ba5-436b-a0b3-8eaf8c9062d9",
+      "name": "Generate With AI",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        1040,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "model": "llama3.1:8b",
+        "options": {
+          "temperature": 0.1,
+          "format": "json"
+        }
+      },
+      "id": "b2ef3e9a-e294-4496-acdc-51aaf235beb8",
+      "name": "Local Ollama Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first().json;\n\nfunction extractJson(value) {\n  if (value && typeof value === 'object' && (value.prompt_entries || value.document_title || value.library_name)) {\n    return value;\n  }\n\n  const raw = String(value?.response || value?.text || value?.output || value?.result || '').trim();\n  if (!raw) throw new Error('AI did not return text or structured JSON.');\n\n  const cleaned = raw\n    .replace(/^```[a-zA-Z]*\\n?/, '')\n    .replace(/```$/, '')\n    .trim();\n\n  try {\n    return JSON.parse(cleaned);\n  } catch (_) {\n    const firstBrace = cleaned.indexOf('{');\n    const lastBrace = cleaned.lastIndexOf('}');\n    if (firstBrace >= 0 && lastBrace > firstBrace) {\n      return JSON.parse(cleaned.slice(firstBrace, lastBrace + 1));\n    }\n  }\n\n  throw new Error('AI did not return usable JSON. Rerun the workflow or use a model that supports JSON output.');\n}\n\nfunction list(items) {\n  if (!Array.isArray(items) || items.length === 0) return '- None added';\n  return items.map((value) => '- ' + String(value)).join('\\n');\n}\n\nfunction placeholders(text) {\n  const found = String(text || '').match(/\\{[a-zA-Z0-9_\\- ]+\\}/g) || [];\n  return [...new Set(found.map((value) => value.replace(/\\s+/g, '_').toLowerCase()))];\n}\n\nfunction fallbackVariables(entry, promptText) {\n  const fromPrompt = placeholders(promptText);\n  if (fromPrompt.length) return fromPrompt;\n  const lower = [entry.title, entry.description, entry.use_case, promptText].join(' ').toLowerCase();\n  if (lower.includes('article') || lower.includes('intro') || lower.includes('draft')) return ['{draft}', '{audience}', '{goal}'];\n  if (lower.includes('newsletter') || lower.includes('subject')) return ['{update_summary}', '{audience}', '{tone}'];\n  if (lower.includes('research')) return ['{research_notes}', '{decision_needed}', '{constraints}'];\n  if (lower.includes('workflow') || lower.includes('n8n')) return ['{workflow_description}', '{tools_used}', '{failure_risks}'];\n  if (lower.includes('task') || lower.includes('note')) return ['{notes}', '{priority_rules}', '{deadline_context}'];\n  return ['{input}', '{goal}', '{constraints}'];\n}\n\nfunction expandPrompt(entry, originalPrompt) {\n  const description = entry.description || 'Complete the task clearly and practically.';\n  const useCase = String(entry.use_case || 'this task needs a reusable AI prompt')\n    .replace(/^use\\s+when\\s+/i, '')\n    .replace(/^when\\s+/i, '')\n    .replace(/[.!?]+$/g, '');\n  const vars = fallbackVariables(entry, originalPrompt);\n  const lower = [entry.title, description, useCase, originalPrompt].join(' ').toLowerCase();\n\n  let format = 'Return a clear, skimmable response with headings, concise bullets only where useful, and a short human review checklist at the end.';\n  let constraints = 'Do not invent facts. If information is missing, state the assumption or ask a clarifying question before making a recommendation.';\n\n  if (lower.includes('research')) {\n    format = 'Return a plain-English summary, key findings, risks or weak spots, three practical next steps, and sources or facts that need verification.';\n    constraints = 'Do not overstate certainty. Separate confirmed details from interpretation. Flag missing context clearly.';\n  } else if (lower.includes('task') || lower.includes('notes')) {\n    format = 'Return a short summary, prioritized action items, parked ideas, open questions, and a final next-action recommendation.';\n    constraints = 'Separate real tasks from vague ideas. Keep tasks action-oriented, assign priority where useful, and flag anything that needs human review.';\n  } else if (lower.includes('article') || lower.includes('intro') || lower.includes('draft')) {\n    format = 'Return one revised version, then a short note explaining what changed and why.';\n    constraints = 'Keep the original meaning. Make the writing clearer, warmer, and less salesy. Do not add claims the draft does not support.';\n  } else if (lower.includes('newsletter') || lower.includes('subject')) {\n    format = 'Return 10 subject line options grouped by angle, plus the 3 strongest picks and a one-sentence reason for each.';\n    constraints = 'Avoid clickbait. Keep the tone useful and specific. Make sure each option matches the update and audience.';\n  } else if (lower.includes('workflow') || lower.includes('n8n')) {\n    format = 'Return the workflow purpose, required inputs, expected output, likely failure points, security concerns, and suggested improvements.';\n    constraints = 'Focus on practical reliability. Point out brittle steps, missing error handling, credential risks, and where human review belongs.';\n  }\n\n  return [\n    'Role: You are a practical AI workflow assistant helping a human turn rough input into a useful result.',\n    '',\n    'Context: Use this prompt when ' + String(useCase).replace(/^when\\s+/i, '') + '.',\n    '',\n    'Input variables: ' + vars.join(', '),\n    '',\n    'Task: ' + description + ' Use the provided input to complete the task in a way that is specific, reusable, and easy for a human to review.',\n    '',\n    'Output format: ' + format,\n    '',\n    'Constraints: ' + constraints\n  ].join('\\n');\n}\n\nfunction isWeakStarterPrompt(promptText) {\n  const text = String(promptText || '').trim();\n  const lower = text.toLowerCase();\n  if (text.length < 360) return true;\n  const intakePatterns = [\n    'please provide',\n    'provide the',\n    'send me',\n    'share your',\n    'tell me',\n    \"i'll help\",\n    'i will help',\n    'once you provide',\n    'please note that this prompt'\n  ];\n  if (intakePatterns.some((pattern) => lower.includes(pattern))) return true;\n\n  const usefulSections = ['role:', 'context:', 'task:', 'output format:', 'constraints:'];\n  const sectionCount = usefulSections.filter((section) => lower.includes(section)).length;\n  return sectionCount < 3;\n}\n\nfunction normalizeEntry(entry) {\n  const originalPrompt = String(entry.copy_ready_prompt || '').trim();\n  const needsExpansion = isWeakStarterPrompt(originalPrompt);\n  const copyReadyPrompt = needsExpansion ? expandPrompt(entry, originalPrompt) : originalPrompt;\n  const promptVariables = fallbackVariables(entry, copyReadyPrompt);\n  return {\n    ...entry,\n    tags: Array.isArray(entry.tags) && entry.tags.length ? entry.tags : ['starter-prompt', 'human-review'],\n    variables: needsExpansion ? promptVariables : (Array.isArray(entry.variables) && entry.variables.length ? entry.variables : promptVariables),\n    copy_ready_prompt: copyReadyPrompt,\n    quality_note: entry.quality_note || 'Review the output for accuracy, missing context, and whether it matches the intended use before saving it permanently.'\n  };\n}\n\nfunction entryMarkdown(entries) {\n  if (!Array.isArray(entries) || entries.length === 0) return 'No prompt entries were generated.';\n  return entries.map(normalizeEntry).map((entry, index) => {\n    return '### ' + (index + 1) + '. ' + (entry.title || 'Untitled Prompt') + '\\n\\n' +\n      '**Category:** ' + (entry.category || 'Uncategorized') + '\\n\\n' +\n      '**Description:** ' + (entry.description || 'No description provided.') + '\\n\\n' +\n      '**Use case:** ' + (entry.use_case || 'Use when this prompt fits the task.') + '\\n\\n' +\n      '**Tags:** ' + entry.tags.join(', ') + '\\n\\n' +\n      '**Variables:** ' + entry.variables.join(', ') + '\\n\\n' +\n      '**Copy-ready prompt:**\\n```text\\n' + entry.copy_ready_prompt + '\\n```\\n\\n' +\n      '**Quality note:** ' + entry.quality_note;\n  }).join('\\n\\n');\n}\n\nconst parsed = extractJson(item);\nconst entries = Array.isArray(parsed.prompt_entries) ? parsed.prompt_entries.map(normalizeEntry) : [];\nconst title = parsed.document_title || parsed.library_name || 'Prompt Starter Library';\nconst markdown = '# ' + title + '\\n\\n' +\n  '## Summary\\n' + (parsed.summary || 'No summary provided.') + '\\n\\n' +\n  '## Library Goal\\n' + (parsed.library_goal || 'Create a reusable AI prompt library from rough tasks.') + '\\n\\n' +\n  '## Categories\\n' + list(parsed.categories) + '\\n\\n' +\n  '## Prompt Entries\\n' + entryMarkdown(entries) + '\\n\\n' +\n  '## Organization Notes\\n' + list(parsed.organization_notes) + '\\n\\n' +\n  '## Missing Context Questions\\n' + list(parsed.missing_context_questions) + '\\n\\n' +\n  '## Next Steps\\n' + list(parsed.next_steps) + '\\n\\n' +\n  '## Human Review Note\\n' + (parsed.review_note || 'Review every generated prompt before adding it to your permanent library.');\n\nreturn [{\n  json: {\n    workflow_name: 'GP-WF-004 - Prompt Starter Library Builder',\n    created_at: new Date().toISOString(),\n    document_title: title,\n    summary: parsed.summary || '',\n    output_markdown: markdown,\n    prompt_count: entries.length,\n    categories: Array.isArray(parsed.categories) ? parsed.categories : [],\n    next_steps: Array.isArray(parsed.next_steps) ? parsed.next_steps : [],\n    review_note: parsed.review_note || ''\n  }\n}];\n"
+      },
+      "id": "6091180e-4f85-4814-8e54-42b0cbf781fb",
+      "name": "Review AI Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1300,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const today = new Date();\nconst date = today.toISOString().slice(0, 10);\nconst workflowName = 'GP-WF-004 - Prompt Library Builder';\nconst title = $json.document_title || 'Prompt Library';\nconst cleanOutput = String($json.output_markdown || '').replace(/^# .+\\n+/, '').trim();\nconst body = [\n  '# ' + title,\n  '',\n  'Created: ' + date,\n  'Workflow: ' + workflowName,\n  $json.prompt_count ? 'Prompts organized: ' + $json.prompt_count : '',\n  Array.isArray($json.categories) && $json.categories.length ? 'Categories: ' + $json.categories.join(', ') : '',\n  '',\n  cleanOutput,\n  '',\n  'Source: GetPrompting Free Workflow Library'\n].filter((line) => line !== '').join('\\n');\nreturn [{ json: { ...$json, workflow_name: workflowName, document_title: workflowName + ' - ' + date, document_body: body } }];"
+      },
+      "id": "21c88ba2-0bbd-439b-acd2-a6b072e646f3",
+      "name": "Prepare Google Doc",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1560,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "document",
+        "operation": "create",
+        "driveId": "myDrive",
+        "folderId": "default",
+        "title": "={{ $json.document_title }}"
+      },
+      "id": "63a2dd72-32f1-4990-814b-513a448e468e",
+      "name": "Create Google Doc",
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        1820,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "document",
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "simple": true,
+        "actionsUi": {
+          "actionFields": [
+            {
+              "object": "text",
+              "action": "insert",
+              "insertSegment": "body",
+              "locationChoice": "endOfSegmentLocation",
+              "text": "={{ $node[\"Prepare Google Doc\"].json.document_body }}"
+            }
+          ]
+        },
+        "updateFields": {}
+      },
+      "id": "3308f214-01bd-4faf-b53f-a42140ef54f8",
+      "name": "Write Google Doc",
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        2080,
+        100
+      ]
+    }
+  ],
+  "connections": {
+    "Manual Start": {
+      "main": [
+        [
+          {
+            "node": "Set Workflow Inputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Workflow Inputs": {
+      "main": [
+        [
+          {
+            "node": "Build AI Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build AI Prompt": {
+      "main": [
+        [
+          {
+            "node": "Generate With AI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Local Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Generate With AI",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate With AI": {
+      "main": [
+        [
+          {
+            "node": "Review AI Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Review AI Output": {
+      "main": [
+        [
+          {
+            "node": "Prepare Google Doc",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Google Doc": {
+      "main": [
+        [
+          {
+            "node": "Create Google Doc",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Google Doc": {
+      "main": [
+        [
+          {
+            "node": "Write Google Doc",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "tags": [
+    "getprompting",
+    "free-workflow-library",
+    "gp-wf-004"
+  ]
+}
